@@ -67,6 +67,13 @@ while [ -h "$SOURCE" ]; do
 done
 SCRIPT_PATH="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
+# Create neccesary files, for storing values for later use, if they don't exists
+[[ ! -f "$SCRIPT_PATH/current_wallpaper_index" ]] && ( touch $SCRIPT_PATH/current_wallpaper_index; echo "reset" > $SCRIPT_PATH/current_wallpaper_index )
+[[ ! -f "$SCRIPT_PATH/list_of_non_repeating_random_numbers" ]] && ( touch $SCRIPT_PATH/list_of_non_repeating_random_numbers )
+[[ ! -f "$SCRIPT_PATH/list_of_wallpapers" ]] && ( touch $SCRIPT_PATH/list_of_wallpapers )
+[[ ! -f "$SCRIPT_PATH/number_of_pics" ]] && ( touch $SCRIPT_PATH/number_of_pics )
+[[ ! -f "$SCRIPT_PATH/wallpaper_error" ]] && ( touch $SCRIPT_PATH/wallpaper_error )
+
 # Cheking if the path to the wallpaperfolder is given if you intend to use it for differently themed wallpaper folders
 [[ "$1" = "" ]] && ( echo -e " Please add location to your wallpaper folder."; exit )
 [[ ! "$1" = "" ]] && WALLPAPER_PATH="$1"
