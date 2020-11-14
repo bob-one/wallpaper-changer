@@ -1,6 +1,6 @@
 #!/bin/bash
 shopt -s nullglob
-
+# test
 # Now grab a manly/womanly beer, or a glass of delicious whisk(e)y (from isle of islay),
 # set up crontab, startup-script, alias or a hot-key and move on to something more productive TODO: Grab a beer
 
