@@ -17,7 +17,7 @@ if [[ ! "$1" = ""  ]] && [[ ! "$2" = "" ]]; then
            count++
         }
       } while (count<loop)
-    }' > $FILE/list_of_non_repeating_random_numbers
+    }' > $FILE/data/list_of_non_repeating_random_numbers
 else
     echo "SyntaxError - should be: [ bash, source or . ] generate_non_repeating_random_numbers [#Loop] [#Range]"
     echo "Example: bash generate_non_repeating_random_numbers 100 100"
