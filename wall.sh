@@ -9,7 +9,7 @@ shopt -s nullglob
 
 set_wallpaper () {
     # Setting the wallpaper usin feh
-    # TODO this specific awk command is dangerous, and can easily be exploited, need to change it.
+    # TODO this specific awk command is dangerous, and can easily be exploited, or so I've been told so probably need to change it. Someday...
     WALLPAPER=$( awk '{if(NR=="'"$RAND"'") print$0}' $SCRIPT_DATA/list_of_wallpapers)
     feh --bg-scale $WALLPAPER 2>>$SCRIPT_DATA/wallpaper_error
     #echo $WALLPAPER > $SCRIPT_PATH/wallpaper # If you need to display the name/path of the current wallpaper some place (like the status bar)
