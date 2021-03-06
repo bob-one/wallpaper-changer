@@ -3,7 +3,7 @@ shopt -s nullglob
 # Now grab a manly/womanly beer, or a glass of delicious whisk(e)y (from isle of islay),
 # set up crontab, startup-script, alias or a hot-key and move on to something more productive TODO: Grab a beer
 
-# I use it in Qtile since their wallpaper widget kind of sucks. Mayby I'll make a new widget in python and submit it to them
+# I use it in Qtile since their wallpaper widget kind of sucks. Maybe I'll make a new widget in python and submit it to them
 # Oh, and if you find this script useful, please use it, abuse it, misuse it and preferably make it better
 # Best wishes and get well soon, sincerely yours -andre
 
@@ -56,7 +56,7 @@ cycle_through () {
 [[ $UID == 0 ]] && ( echo "Dont run an unknown script as sudo, atleast read through it, and try to understand it before you try sudo on it"; exit )
 
 # Get the path to where this script is run from and asigning it the the variable $SCRIPT_PATH
-# In case it's a symlink: Resolve $SOURCE until the it's no longer a symlink
+# In case it's a symlink: Resolve $SOURCE until it's no longer a symlink
 # If $SOURCE was a relative symlink, resolve it relative to the path where the symlink was located
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
@@ -66,6 +66,7 @@ while [ -h "$SOURCE" ]; do
 done
 SCRIPT_PATH="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_DATA="$SCRIPT_PATH/data"
+
 # Create neccesary files, for storing values for later use, if they don't exists
 [[ ! -d "$SCRIPT_DATA" ]] && ( mkdir $SCRIPT_PATH/data )
 [[ ! -f "$SCRIPT_DATA/current_wallpaper_index" ]] && ( touch $SCRIPT_DATA/current_wallpaper_index; echo "reset" > $SCRIPT_DATA/current_wallpaper_index )
@@ -74,11 +75,11 @@ SCRIPT_DATA="$SCRIPT_PATH/data"
 [[ ! -f "$SCRIPT_DATA/number_of_pics" ]] && ( touch $SCRIPT_DATA/number_of_pics )
 [[ ! -f "$SCRIPT_DATA/wallpaper_error" ]] && ( touch $SCRIPT_DATA/wallpaper_error )
 
-# Cheking if the path to the wallpaperfolder is given if you intend to use it for differently themed wallpaper folders
+# Cheking if the path to the wallpaperfolder is given as an argument
 [[ "$1" = "" ]] && ( echo -e " Please add location to your wallpaper folder."; exit )
 [[ ! "$1" = "" ]] && WALLPAPER_PATH="$1"
 
-# You can also just hard code the path if you dont intend to use it for differently themed wallpaper folders
+# You can also just hard code the path if you want
 #WALLPAPER_PATH="$HOME/Pictures/wallp"
 
 # Set PATH variable to be able to use crontab to set the wallpaper
@@ -86,6 +87,7 @@ export DISPLAY=:0
 export XAUTHORITY=$HOME/.Xauthority
 export XDG_RUNTIME_DIR=/run/user/1000
 
+# If something goes wrong, just replace the contents of the file "current_wallpaper_index" with "reset"
 read INDX < $SCRIPT_DATA/current_wallpaper_index 2>>$SCRIPT_DATA/wallpaper_error
 [[ "$INDX" = "reset" ]] && ( start_over )
 read LIMIT < $SCRIPT_DATA/number_of_pics 2>>$SCRIPT_DATA/wallpaper_error
